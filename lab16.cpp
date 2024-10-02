@@ -1,6 +1,5 @@
 #include <iostream>
-#include <iomanip> // For std::setw and std::setfill
-using namespace std;
+#include <iomanip> 
 
 class Color {
 private:
