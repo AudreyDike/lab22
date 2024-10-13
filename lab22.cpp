@@ -25,7 +25,7 @@ public:
     // Push to the back of the list
     void push_back(int value) {
         Node* newNode = new Node(value);
-        if (!tail) { // if there's no tail, the list is empty
+        if (!tail) { 
             head = tail = newNode;
         } else {
             tail->next = newNode;
@@ -34,3 +34,24 @@ public:
         }
     }
 
+    void insert_after(int value, int position) {
+        if (position < 0) {
+            cout << "Position must be >= 0." << endl;
+            return;
+        }
+        Node* newNode = new Node(value);
+        if (!head) {
+            head = tail = newNode;
+            return;
+        }
+
+        Node* current = head;
+        for (int i = 0; i < position && current != nullptr; ++i) {
+            current = current->next;
+        }
+
+        if (current == nullptr) { 
+            push_back(value);
+        } else {
+            newNode->next = current;
+            newNode->prev = current->prev;
