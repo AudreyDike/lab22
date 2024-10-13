@@ -94,4 +94,42 @@ public:
             delete current;
         }
     }
+// Delete the head node
+    void pop_front() {
+        if (!head) return; // List is empty
+        Node* temp = head;
+        head = head->next;
+        if (head) head->prev = nullptr; // Update the new head
+        else tail = nullptr; // List is empty now
+        delete temp;
+    }
+
+    // Delete the tail node
+    void pop_back() {
+        if (!tail) return; // List is empty
+        Node* temp = tail;
+        tail = tail->prev;
+        if (tail) tail->next = nullptr; // Update the new tail
+        else head = nullptr; // List is empty now
+        delete temp;
+    }
+
+    // Rename delete() to delete_val() for deleting by value
+    void delete_val(int value) {
+        Node* current = head;
+        while (current) {
+            if (current->data == value) {
+                if (current == head) pop_front();
+                else if (current == tail) pop_back();
+                else {
+                    current->prev->next = current->next;
+                    current->next->prev = current->prev;
+                    delete current;
+                }
+                return; // Value deleted; exit
+            }
+            current = current->next;
+        }
+        cout << "Value not found in the list." << endl;
+    }
 
