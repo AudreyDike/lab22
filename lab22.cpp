@@ -132,4 +132,65 @@ public:
         }
         cout << "Value not found in the list." << endl;
     }
+ // Display the list
+    void display() const {
+        Node* current = head;
+        while (current) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+    }
+};
+
+// Driver to test the updated class
+int main() {
+    DoublyLinkedList dll;
+
+    // Testing push_back and display
+    for (int i = 10; i <= 20; i += 2) {
+        dll.push_back(i);
+    }
+    cout << "List after push_back: ";
+    dll.display();
+
+    // Testing push_front
+    dll.push_front(5);
+    cout << "List after push_front(5): ";
+    dll.display();
+
+    // Testing insert_after
+    dll.insert_after(15, 3); // Insert 15 after position 3
+    cout << "List after insert_after(15, 3): ";
+    dll.display();
+
+    // Testing delete_pos
+    dll.delete_pos(0); // Delete head
+    cout << "List after delete_pos(0): ";
+    dll.display();
+
+    dll.delete_pos(3); // Delete position 3
+    cout << "List after delete_pos(3): ";
+    dll.display();
+
+    dll.delete_pos(100); // Invalid position
+    cout << "Attempting to delete at invalid position (100): ";
+    dll.display();
+
+    // Testing pop_front and pop_back
+    dll.pop_front();
+    cout << "List after pop_front: ";
+    dll.display();
+
+    dll.pop_back();
+    cout << "List after pop_back: ";
+    dll.display();
+
+    // Testing delete_val
+    dll.delete_val(12); // Delete by value
+    cout << "List after delete_val(12): ";
+    dll.display();
+
+    return 0;
+}
 
