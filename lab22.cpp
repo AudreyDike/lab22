@@ -55,3 +55,43 @@ public:
         } else {
             newNode->next = current;
             newNode->prev = current->prev;
+
+            if (current->prev) {
+                current->prev->next = newNode;
+            } else {
+                head = newNode; // Update head if inserting at the front
+            }
+            current->prev = newNode;
+        }
+    }
+
+    // Delete a node by position
+    void delete_pos(int position) {
+        if (position < 0 || !head) {
+            cout << "Invalid position." << endl;
+            return;
+        }
+
+        Node* current = head;
+
+        // Traverse to the desired position
+        for (int i = 0; i < position && current != nullptr; ++i) {
+            current = current->next;
+        }
+
+        if (!current) { // If the position is out of bounds
+            cout << "Position out of bounds." << endl;
+            return;
+        }
+
+        if (current == head) { // If the node to delete is the head
+            pop_front();
+        } else if (current == tail) { // If the node to delete is the tail
+            pop_back();
+        } else { // If the node to delete is in the middle
+            current->prev->next = current->next;
+            current->next->prev = current->prev;
+            delete current;
+        }
+    }
+
